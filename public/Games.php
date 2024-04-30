@@ -8,3 +8,5 @@ $page = new Page('Games');
 $tiles = [];
 
 // TODO: generate the content of the page
+
+echo "Games page";

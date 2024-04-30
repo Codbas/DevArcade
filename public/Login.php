@@ -4,4 +4,6 @@ include('../includes/PasswordManager.php');
 
 // TODO: load login page
 
+echo "login page";
+
 

@@ -8,9 +8,11 @@ include('../includes/GameLoader.php');
 
 // TODO : if no game found, display error message and stop executing script
 
-$title = $_POST['game'];
+// $title = $_POST['game'];
 
-$game = new GameLoader($title);
+// $game = new GameLoader($title);
 
-echo $game->getHTMLString();
+// echo $game->getHTMLString();
+
+echo "Game page";
 

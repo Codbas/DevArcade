@@ -8,8 +8,10 @@ include('../includes/DevLog.php');
 
 // TODO : if no devlog found, display error message and stop executing script
 
-$title = $_POST['title'];
+// $title = $_POST['title'];
 
-$devlog = new DevLog($title);
+// $devlog = new DevLog($title);
 
-echo $devlog->getHTMLString();
+// echo $devlog->getHTMLString();
+
+echo "DevLog Page";
