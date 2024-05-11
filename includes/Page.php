@@ -2,24 +2,22 @@
 // Each page under /public has a Page class. Generates HTML content
 // for the header and footer. Logic for adding page views and site hits.
 class Page {
-    private string $pageName;
+    private string $title;
     private $dbConn;
 
-    function __construct(string $pageName /*, $dbConn */) {
-        $this->pageName = $pageName;
-
-        // TODO: $this->dbConn = $dbConn;
+    function __construct(string $title, $dbConn) {
+        $this->title = $title;
+        $this->dbConn = $dbConn;
+    }
+    public function getNavbarHTMLString() : string {
+        $title = $this->title;
+        return strval(include('../includes/navbar.php'));
     }
     public function getHeaderHTMLString() : string {
-        $html = '';
-        // TODO : generate HTML header content based on current page
-
-        return $html;
+        return include('../includes/header.php');
     }
     public function getFooterHTMLString() : string {
-        $html = '';
-        // TODO: generate HTML footer content
-        return $html;
+        return strval(include('../includes/footer.php'));
     }
     public function incPageViews(string $ip) : bool {
         // TODO: use $dbConn add view (ip, datetime, pageName)
@@ -41,5 +39,4 @@ class Page {
         // TODO: if no view found, return -1
         return -1;
     }
-
 }

@@ -6,10 +6,10 @@ class DevLog {
     private string $title;
     private $dbConn;
 
-    function __construct(string $title /*, $dbConn */ ) {
+    function __construct(string $title, $dbConn) {
         $this->title = $title;
 
-        // TODO: $this->dbConn = $dbConn;
+        $this->dbConn = $dbConn;
 
         // TODO: connect to database to assign $views and $description
     }
@@ -20,7 +20,7 @@ class DevLog {
     public function getTitle() : string {
         return $this->title;
     }
-    public function addView() {
+    public function addView() : bool {
         // TODO: logic to ensure the view should be added to the database
 
         // TODO: check that dev log with an id exists, if not, create one
@@ -28,12 +28,23 @@ class DevLog {
         // TODO: get devlogid for this dev log
 
         // TODO: connect to database and add view (devlogid, ip,timestamp)
+
+        return true;
     }
     public function getHTMLString() : string {
-        $html = '';
+        $gameTitle = urlencode(substr($this->title, 9));
+        $redirectUrl = "Game.php?title=$gameTitle";
 
-        // TODO: generate HTML content for the devlog page
-
+        $html = '
+        <div class="devlog-container">
+            <div class="devlog-top-bar">
+                <div class="devlog-title">' . $this->title . '</div>
+                <div class="devlog-views">Views: ' . $this->views . '</div>
+                <a href="' . $redirectUrl . '"><div class="game-link-button" >Play The Game</div></a>
+            </div>
+                <iframe class="devlog-iframe" onload="this.height=(this.contentWindow.document.body.scrollHeight) + 100;" src="../devlogs/' . $this->title . '/index.html"></iframe>
+        </div>
+        ';
         return $html;
     }
 }

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg: #fff;
+    --text: #000;
+    --text-active: #fff;
+    --highlight: #00dbff;
+    --shadow: #333;
+}
+
+.navbar-container {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px;
+    align-self: flex-start;
+}
+
+#login-button {
+    align-self: flex-end;
+    height: 25px;
+    cursor: pointer;
+    padding-bottom: 10px;
+    display: block;
+}
+
+.logo {
+    margin-top: 5px;
+    text-align: center;
+    line-height: 35px;
+    border: solid 1px black;
+    border-radius: 15px;
+    height: 40px;
+    width: 80px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+}
+
+.logo:hover {
+    border-color: #777;
+    color: #777;
+}
+
+.navbar {
+    font-family: Urbanist;
+    font-size: 1.3em;
+    list-style: none;
+    text-align: center;
+    min-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    padding: 0;
+}
+
+.navbar li {
+    display: inline-block;
+    padding: 10px 30px;
+}
+
+.navbar li a {
+    border-bottom: solid 2px #fff;
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: .1s;
+}
+
+.navbar li a:hover {
+    color: #777;
+}
+
+.navbar li.active:hover a {
+    color: #777;
+    border-bottom: solid 2px #777;
+}
+
+.navbar li.active a {
+    border-bottom: solid 2px #000;
+}
+
+.navbar li a:focus {
+    transition: .1s;
+    outline: none;
+}
+
+.navbar li.active a:focus {
+    color: var(--text-active);
+    transition: .1s;
+}

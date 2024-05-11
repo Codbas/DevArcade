@@ -1,0 +1,40 @@
+.home-wrapper {
+    max-width: 1400px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.welcome-text-wrapper {
+    width: 100%;
+}
+.welcome-text {
+    text-align: center;
+    height: 100px;
+    margin-top: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 20px;
+}
+.home-content {
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.featured-text {
+    margin-top: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-decoration: underline;
+    font-size: 22px;
+    font-weight: bold;
+}
+.featured-container {
+    align-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px,1fr));
+    max-width: 1200px;
+    width: auto;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}

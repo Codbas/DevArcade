@@ -17,7 +17,7 @@ class GameLoader {
     public function getTitle() : string {
         return $this->title;
     }
-    public function addPlay() {
+    public function addPlay() : bool {
         // TODO: logic to ensure the play should be added to the database
 
         // TODO: check that game with an id exists, if not, create one
@@ -25,6 +25,8 @@ class GameLoader {
         // TODO: get gameid for this game
 
         // TODO: connect to database and add play (gameid, ip,timestamp)
+
+        return true;
     }
     public function getHTMLString() : string {
         $html = '';

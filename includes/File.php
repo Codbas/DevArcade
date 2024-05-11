@@ -17,6 +17,9 @@ class File {
         return true;
     }
 
+    public function error() : string {
+        return $this->errorMessage;
+    }
     public function delete(string $title) : bool {
         // TODO: verify that file is in the /Games or /DevLogs directory
 
@@ -27,6 +30,5 @@ class File {
         // TODO: logic to check that contents are valid
         return true;
     }
-
 }
 ?>

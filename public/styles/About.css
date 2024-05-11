@@ -1,0 +1,10 @@
+.about-wrapper {
+    margin-top: 50px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.about-text {
+    margin: 10px;
+    font-size: 18px;
+}

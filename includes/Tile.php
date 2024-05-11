@@ -1,13 +1,13 @@
 <?php
 // Base class for Tiles
 class Tile {
-    private string $title;
-    private string $description = 'Looks like no description exists...';
+    protected string $title;
+    protected string $description = 'Looks like no description exists...';
+    protected $dbConn;
 
-    function __construct(string $title /*, $dbConn */) {
+    function __construct(string $title , $dbConn) {
         $this->title = $title;
-
-        // TODO: $this->dbConn = $dbConn;
+        $this->dbConn = $dbConn;
 
         // TODO: Get description from the database and assign to $description
     }
