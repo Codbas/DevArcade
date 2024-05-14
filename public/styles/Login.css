@@ -1,0 +1,46 @@
+#login-form {
+
+    padding: 30px;
+    margin-top: 50px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+}
+
+.username-label, .password-label {
+    float: left;
+    width: 180px;
+}
+#username, #password {
+    float: right;
+    width: 180px;
+}
+
+.username-container, .password-container {
+    width: auto;
+    height: 50px;
+}
+
+#submit-button {
+    width: 60px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#login-message {
+    text-align: center;
+    color: red;
+    width: 300px;
+    height: 30px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+#login-button-anchor, #login-button {
+    display: none !important;
+    width: 42px;
+}

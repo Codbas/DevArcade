@@ -10,6 +10,9 @@ echo '<body>';
 
 $page = new Page($title, $dbConn);
 
+// DB connection test for valid session
+echo $page->checkLogin('abcde', 'cody');
+
 echo '
 <div class="about-wrapper">
     <div class="about-text">

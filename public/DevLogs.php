@@ -1,6 +1,6 @@
 <?php
 // This page lists every dev log from the /devlogs folder in a DevLog tile.
-$title = 'DevLogs';
+$title = 'Dev Logs';
 include('../includes/db.php');
 include('../includes/Page.php');
 include('../includes/DevLogTile.php');
@@ -9,7 +9,7 @@ include('../includes/header.php');
 include('../includes/navbar.php');
 echo '<body>';
 
-$page = new Page('DevLogs', $dbConn);
+$page = new Page('Dev Logs', $dbConn);
 
 $dir = '../devlogs';
 

@@ -6,4 +6,5 @@ include('../includes/File.php');
 
 // TODO: else load change password page
 
-echo "Change Password page";
+echo password_hash('password', PASSWORD_DEFAULT);
+

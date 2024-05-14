@@ -14,7 +14,7 @@ echo '<body>';
 $page = new Page($title, $dbConn);
 
 $featuredGame = 'Game One';
-$featuredDevLog = 'DevLog - Game One';
+$featuredDevLog = 'Dev Log - Game One';
 $gameTile = new GameTile($featuredGame, $dbConn);
 $devLogTile = new DevLogTile($featuredDevLog, $dbConn);
 

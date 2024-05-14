@@ -37,20 +37,41 @@ create table GamePlays(
     foreign key (gameId) references  Games(id)
 );
 create table Users(
-    userName varchar(20) not null,
-    password char(32) not null,
-    salt char(32) not null,
-    primary key (userName)
+    username varchar(20) not null,
+    password varchar(255) not null,
+    primary key (username)
 );
 create table Sessions(
-    sessionId char(32) not null,
+    sessionId varchar(255) not null,
     userName varchar(20) not null,
     lastActive datetime not null,
     primary key (sessionId),
-    foreign key (userName) references Users(userName)
+    foreign key (username) references Users(username)
 );
 create table SiteHits(
     timestamp datetime not null,
     ip varchar(15) not null,
     primary key (timestamp, ip)
 );
+
+insert into Users (username, password) (
+    values('cody', '$2y$10$YS6RTyB6l2VjCp8h2q9Ffuc49iYKIsHP/c9gsqj5TSBTyst7UyH6K')
+);
+
+insert into Pages (id, name) (
+    values(1, 'Home'),
+          (2, 'Games'),
+          (3, 'Dev Logs'),
+          (4, 'About'),
+          (5, 'Log In')
+);
+
+insert into Sessions(sessionId, lastActive, userName) (
+    values('abcde', NOW(), 'cody')
+);
+
+
+select sessionId, lastActive
+from Sessions join Users on Sessions.username = Users.username
+where Users.username = 'cody'
+order by Sessions.lastActive desc limit 1
