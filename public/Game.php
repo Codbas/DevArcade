@@ -1,6 +1,15 @@
 <?php
-// Retrieved with POST, the game to load is under the parameter "game"
+// Retrieved with GET, the game to load is under the parameter "game"
+$title = urldecode($_GET['title']);
+include('../includes/db.php');
 include('../includes/GameLoader.php');
+include('../includes/Page.php');
+
+include('../includes/header.php');
+include('../includes/navbar.php');
+echo '<body>';
+
+$page = new Page($title, $dbConn); // is this needed?
 
 // TODO: create a database connection
 
@@ -14,5 +23,4 @@ include('../includes/GameLoader.php');
 
 // echo $game->getHTMLString();
 
-echo "Game page";
-
+include('../includes/footer.php');

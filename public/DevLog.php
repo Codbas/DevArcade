@@ -11,17 +11,12 @@ echo '<body>';
 
 $page = new Page($title, $dbConn); // is this needed?
 
-// TODO: create a database connection
-
-// TODO: look for devlog with the title from $_POST['title']
+// TODO: create a database connection to track views
 
 // TODO : if no devlog found, display error message and stop executing script
-
-
 
 $devlog = new DevLog($title, $dbConn);
 
 echo $devlog->getHTMLString();
-
 
 include('../includes/footer.php');

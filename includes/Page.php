@@ -5,6 +5,8 @@ class Page {
     private string $title;
     private $dbConn;
 
+    private $loggedIn = false;
+
     function __construct(string $title, $dbConn) {
         $this->title = $title;
         $this->dbConn = $dbConn;
@@ -20,6 +22,8 @@ class Page {
         return strval(include('../includes/footer.php'));
     }
     public function incPageViews(string $ip) : bool {
+        // TODO: if page does not exist, create new in database?
+        
         // TODO: use $dbConn add view (ip, datetime, pageName)
         return true;
     }
@@ -38,5 +42,37 @@ class Page {
 
         // TODO: if no view found, return -1
         return -1;
+    }
+    public function checkLogin(string $sessionId, string $username) : bool {
+        // DB test code
+        $sql = 'select sessionId, lastActive 
+                from Sessions join Users on Sessions.username = Users.username 
+                where Users.username = :username 
+                order by Sessions.lastActive desc limit 1';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam(':username', $username);
+        $stmt->execute();
+
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $lastActive = $result['lastActive'];
+            $sesionMatch = false;
+            if ($sessionId == $result['sessionId']) {
+                $sessionMatch = true;
+            }
+
+            echo "session id: $sessionId for $username was last active at $lastActive";
+        }
+        else {
+            echo "no session found for $username";
+        }
+        // TODO: check database to see if sessionID is in database & lastActive < 1 hour
+
+        // TODO: if session expired send logout request to logout.php
+
+        // TODO: if logout request successful, $this->loggedIn = false;
+
+        return $this->loggedIn;
     }
 }

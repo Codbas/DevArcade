@@ -1,0 +1,63 @@
+#dash-menu {
+    border-left: solid 1px #ccc;
+    background: #f1f1f1;
+    width: 200px;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    overflow-y: auto;
+    transition: 0.3s;
+    transform: translateX(100%);
+}
+#dash-menu.visible {
+    transform: translateX(0);
+}
+
+#dash-close-button {
+    font-family: "Helvetica";
+    font-size: 14px;
+    background: #fff;
+    border-radius: 2px;
+    line-height: 22px;
+    position: relative;
+    float: right;
+    box-shadow: 0px 2px 10px #ccc;
+    text-align: center;
+    margin-left: auto;
+    width: 25px;
+    height: 25px;
+}
+
+#dash-change-password {
+    margin-top: 40px;
+    border-top: solid 1px #ccc;
+}
+#dash-change-password, #dash-manage-content, #dash-logout {
+    font-family: "Helvetica";
+    font-size: 14px;
+    height: 30px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px #ccc;
+    transition: 0.1s;
+}
+#dash-change-password:hover, #dash-manage-content:hover, #dash-logout:hover, #dash-close-button:hover {
+    color: #444;
+    background: #ccc;
+    cursor: pointer;
+}
+
+
+#dash-logout {
+    margin-top: auto;
+}
+#dash-logout:hover {
+    color: #b70000;
+}

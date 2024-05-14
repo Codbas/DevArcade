@@ -1,3 +1,7 @@
+<?php
+
+
+?>
 <nav>
     <div class="navbar-container">
         <a class="logo" href="../public/Home.php">Logo</a>
@@ -15,8 +19,17 @@
                 <a href="../public/About.php">About</a>
             </li>
         </ul>
-        <a id="login-button" href="../public/Login.php">
-            <input type="button" value="Log In">
-        </a>
+        <?php if ($loggedIn) echo '
+        <div id="dashboard-wrapper">
+                <input type="button" id="dashboard-button" value="Dashboard">
+        </div>
+        ';
+        else echo '
+        <div id="login-button-wrapper">
+            <a id="login-button-anchor" href="../public/Login.php">
+                <input type="button" id="login-button" value="Log In">
+            </a>
+        </div>
+        '; ?>
     </div>
 </nav>
