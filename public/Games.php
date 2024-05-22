@@ -1,15 +1,9 @@
-<?php
+<?php session_start();
 // This page lists every game from the /games folder in a GameTile.
 $title = 'Games';
-include('../includes/db.php');
-include('../includes/Page.php');
-include('../includes/GameTile.php');
+require_once '../includes/config.php';
 
-include('../includes/header.php');
-include('../includes/navbar.php');
 echo '<body>';
-
-$page = new Page('Games', $dbConn);
 
 $dir = '../games';
 

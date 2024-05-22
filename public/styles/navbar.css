@@ -14,6 +14,7 @@
     margin-right: auto;
     height: 50px;
     align-self: flex-start;
+    max-width: 1400px;
 }
 #dashboard-button {
     width: 80px;
@@ -37,22 +38,16 @@
     width: 100px;
 }
 
-.logo {
+.logo, .logo img {
     margin-top: 5px;
-    text-align: center;
-    line-height: 35px;
-    border: solid 1px black;
-    border-radius: 15px;
-    height: 40px;
-    width: 80px;
+    height: 26px;
+    width: 60px;
     cursor: pointer;
-    text-decoration: none;
-    color: #000;
+
 }
 
-.logo:hover {
-    border-color: #777;
-    color: #777;
+.logo:hover, .logo img:hover {
+    fill: red;
 }
 
 .navbar {

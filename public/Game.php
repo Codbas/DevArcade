@@ -1,26 +1,18 @@
-<?php
+<?php session_start();
+/* @var PDO $dbConn
+ *
+ */
 // Retrieved with GET, the game to load is under the parameter "game"
-$title = urldecode($_GET['title']);
-include('../includes/db.php');
-include('../includes/GameLoader.php');
-include('../includes/Page.php');
 
-include('../includes/header.php');
-include('../includes/navbar.php');
+// TODO: remove all characters except letters, numbers, and hyphens from $title
+
+$title = urldecode($_GET['title']);
+require_once '../includes/config.php';
+
 echo '<body>';
 
-$page = new Page($title, $dbConn); // is this needed?
+$game = new GameLoader($title, $dbConn);
 
-// TODO: create a database connection
-
-// TODO: look for game with the title from $_POST['game']
-
-// TODO : if no game found, display error message and stop executing script
-
-// $title = $_POST['game'];
-
-// $game = new GameLoader($title);
-
-// echo $game->getHTMLString();
+echo $game->getHTMLString();
 
 include('../includes/footer.php');

@@ -1,21 +1,18 @@
-<?php
+<?php session_start();
 // called with a GET method, the parameter "title" is used to load the dev log.
+
+// TODO: remove all characters except letters, numbers, and hyphens from $title
+
 $title = urldecode($_GET['title']);
-include('../includes/db.php');
-include('../includes/DevLog.php');
-include('../includes/Page.php');
+require_once '../includes/config.php';
 
-include('../includes/header.php');
-include('../includes/navbar.php');
 echo '<body>';
-
-$page = new Page($title, $dbConn); // is this needed?
-
-// TODO: create a database connection to track views
 
 // TODO : if no devlog found, display error message and stop executing script
 
-$devlog = new DevLog($title, $dbConn);
+// TODO: increment dev log view count
+
+$devlog = new DevLogLoader($title, $dbConn);
 
 echo $devlog->getHTMLString();
 

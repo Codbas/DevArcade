@@ -3,9 +3,9 @@
 // for the header and footer. Logic for adding page views and site hits.
 class Page {
     private string $title;
-    private $dbConn;
+    private PDO $dbConn;
 
-    private $loggedIn = false;
+    private bool $loggedIn = false;
 
     function __construct(string $title, $dbConn) {
         $this->title = $title;
@@ -43,36 +43,52 @@ class Page {
         // TODO: if no view found, return -1
         return -1;
     }
-    public function checkLogin(string $sessionId, string $username) : bool {
+    public function secondsSinceLastActiveSession(string $sessionId, string $username) : int {
         // DB test code
-        $sql = 'select sessionId, lastActive 
+        $sql = 'select lastActive 
                 from Sessions join Users on Sessions.username = Users.username 
-                where Users.username = :username 
+                where Users.username = :username and Sessions.sessionId = :sessionId
                 order by Sessions.lastActive desc limit 1';
         $stmt = $this->dbConn->prepare($sql);
         $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':sessionId', $sessionId);
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
         if ($result) {
-            $lastActive = $result['lastActive'];
-            $sesionMatch = false;
-            if ($sessionId == $result['sessionId']) {
-                $sessionMatch = true;
+            try {
+                $lastActive = new DateTime($result['lastActive']);
+            } catch (Exception $e) {
+                echo "ERROR:1100 - contact website administrator.";
+                $lastActive = (new DateTime())->setTimestamp(0);
+                error_log('error assigning date to $lastActive in Page.php');
             }
-
-            echo "session id: $sessionId for $username was last active at $lastActive";
         }
         else {
             echo "no session found for $username";
+            $lastActive = (new DateTime())->setTimestamp(0);
         }
-        // TODO: check database to see if sessionID is in database & lastActive < 1 hour
 
-        // TODO: if session expired send logout request to logout.php
+        $now = (new DateTime('now'));;
+        $interval = abs($now->getTimestamp() - $lastActive->getTimestamp());
 
-        // TODO: if logout request successful, $this->loggedIn = false;
+        return $interval;
+    }
 
-        return $this->loggedIn;
+    public function logout(string $sessionId) : bool {
+        $sql = 'delete from Sessions
+                where sessionId = :sessionId
+        ';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam(':sessionId', $sessionId);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            session_unset();
+            session_destroy();
+            return true;
+        }
+
+        return false;
     }
 }

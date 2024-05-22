@@ -8,7 +8,7 @@ class GameTile extends Tile
     function __construct(string $title, $dbConn)
     {
         parent::__construct($title, $dbConn);
-
+        $this->setDescription();
         // TODO: connect to database to get plays for the game (plays are stored individually, so the query needs to count them)
     }
 
@@ -49,5 +49,19 @@ class GameTile extends Tile
     ';
     return $html;
     }
+
+    private function setDescription() : void {
+        $sql = 'select description from Games where title = :title limit 1';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam(':title', $this->title);
+        $stmt->execute();
+        if ($stmt->rowCount() === 1) {
+            $this->description = $stmt->fetch(PDO::FETCH_ASSOC)['description'];
+        }
+        else {
+            $this->description = 'There was an error loading the description.';
+        }
+    }
+
 }
 ?>

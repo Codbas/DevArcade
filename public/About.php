@@ -1,17 +1,11 @@
-<?php
+<?php session_start();
 // The About page for the website
 $title = 'About';
-include('../includes/db.php');
-include('../includes/Page.php');
+require_once '../includes/config.php';
 
-include('../includes/header.php');
-include('../includes/navbar.php');
+// TODO: increment page view count.
+
 echo '<body>';
-
-$page = new Page($title, $dbConn);
-
-// DB connection test for valid session
-echo $page->checkLogin('abcde', 'cody');
 
 echo '
 <div class="about-wrapper">

@@ -1,6 +1,6 @@
 <?php
-// Creates the HTML content for a DevLog page based on the title of the dev log
-class DevLog {
+// Creates the HTML content for a DevLogLoader page based on the title of the dev log
+class DevLogLoader {
     private int $views = 0;
     private string $description = 'Looks like no description exists...';
     private string $title;
@@ -8,10 +8,7 @@ class DevLog {
 
     function __construct(string $title, $dbConn) {
         $this->title = $title;
-
         $this->dbConn = $dbConn;
-
-        // TODO: connect to database to assign $views and $description
     }
 
     public function getViews() : int {
@@ -32,7 +29,11 @@ class DevLog {
         return true;
     }
     public function getHTMLString() : string {
-        $gameTitle = urlencode(substr($this->title, 9));
+        if (!file_exists("../devlogs/$this->title")) {
+            return "<p style='text-align: center; font-size: 20px; margin-top: 100px;'>Dev Log: <b>$this->title</b> not found</p>";
+        }
+
+        $gameTitle = urlencode(substr($this->title, 10));
         $redirectUrl = "Game.php?title=$gameTitle";
 
         $html = '

@@ -24,6 +24,7 @@ document.addEventListener("click", isClickOutsideDashMenu);
 dashCloseBtn.addEventListener("click", hideDashMenu);
 changePasswordOption.addEventListener("click", clickRedirect);
 manageContentOption.addEventListener("click", clickRedirect);
+logoutOption.addEventListener("click", clickLogout);
 
 dashMenu.append(dashCloseBtn, changePasswordOption, manageContentOption, logoutOption);
 document.body.appendChild(dashMenu);
@@ -33,13 +34,15 @@ function showDashMenu(event) {
     dashMenu.className = "visible";
 }
 
-function hideDashMenu() {
+function hideDashMenu(event) {
     dashMenu.classList.remove("visible");
+    event.preventDefault();
+    event.stopPropagation();
 }
 
 function isClickOutsideDashMenu(event) {
     if (dashMenu.classList.contains('visible') && !dashMenu.contains(event.target)) {
-        hideDashMenu();
+        hideDashMenu(event);
     }
 }
 
@@ -47,10 +50,10 @@ function clickRedirect(event) {
     console.log(event.target.id);
     switch (event.target.id) {
         case 'dash-change-password':
-            window.location.href = "/public/ChangePassword.php";
+            window.location.href = "../public/ChangePassword.php";
             break;
         case 'dash-manage-content':
-            window.location.href = "/public/ManageContent.php";
+            window.location.href = "../public/ManageContent.php";
             break;
         default:
             // Do nothing
@@ -58,5 +61,23 @@ function clickRedirect(event) {
 }
 
 function clickLogout() {
-    // TODO: remove session token from database and remove session storage, redirect to home
+    fetch('../includes/logoutUser.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({})
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            if (data.status === 'success') {
+                window.location.href = "../public/Home.php";
+            } else {
+                console.error('Logout failed');
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 }

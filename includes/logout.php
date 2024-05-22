@@ -1,2 +1,0 @@
-<?php
-// accessed via POST
