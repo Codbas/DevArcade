@@ -1,17 +1,12 @@
-<?php
+<?php session_start();
 // The Home page for the website
+/* @var PDO $dbConn
+ *
+ */
 $title = 'Home';
+require_once '../includes/config.php';
 
-include('../includes/db.php');
-include('../includes/Page.php');
-include('../includes/GameTile.php');
-include('../includes/DevLogTile.php');
-
-include('../includes/header.php');
-include('../includes/navbar.php');
 echo '<body>';
-
-$page = new Page($title, $dbConn);
 
 $featuredGame = 'Game One';
 $featuredDevLog = 'Dev Log - Game One';
@@ -37,8 +32,5 @@ echo $gameTile->getHTMLEventListener();
 echo $devLogTile->getHTMLEventListener();
 
 // TODO: Check to see if page should increment site hit and page view
-
-// TODO: generate the content of the page
-
 
 include('../includes/footer.php');

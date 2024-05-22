@@ -11,6 +11,8 @@ body.style.margin = '0px';
 body.style.overflow = 'hidden';
 body.innerHTML = 'Game One';
 body.style.cssText = `
+    width: 1400px;
+    height: 800px;
     margin: 0px;
     margin-top: 10vh;
     font-weight: bold;

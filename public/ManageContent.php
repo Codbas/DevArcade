@@ -1,8 +1,17 @@
-<?php
-include('../includes/File.php');
+<?php session_start();
+$title = 'Manage Content';
 
-// TODO: If valid login session not found, ERROR 501: Unauthorized
+if (!isset($_SESSION['username'], $_SESSION['sessionId'])) {
+    echo '<p>ERROR 501: Unauthorized</p>';
+    exit();
+}
 
-// TODO: else load manage content page
+require_once '../includes/config.php';
 
-echo "Manage Contenet page";
+echo '<body>';
+
+// TODO: increase manage content page view by 1
+
+// TODO: load manage content page
+
+include('../includes/footer.php');

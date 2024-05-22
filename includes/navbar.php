@@ -1,10 +1,7 @@
-<?php
-
-
-?>
 <nav>
     <div class="navbar-container">
-        <a class="logo" href="../public/Home.php">Logo</a>
+        <a class="logo" href="../public/Home.php">
+            <img alt="rand" src="../res/logo.svg"></a>
         <ul class="navbar">
             <li <?php if ($title == 'Home') echo 'class="active"';?> >
                 <a href="../public/Home.php">Home</a>
