@@ -59,7 +59,7 @@ class Page {
             try {
                 $lastActive = new DateTime($result['lastActive']);
             } catch (Exception $e) {
-                echo "ERROR:1100 - contact website administrator.";
+                echo "ERROR:1100 - If this issue persists, contact website administrator.";
                 $lastActive = (new DateTime())->setTimestamp(0);
                 error_log('error assigning date to $lastActive in Page.php');
             }
@@ -69,7 +69,7 @@ class Page {
             $lastActive = (new DateTime())->setTimestamp(0);
         }
 
-        $now = (new DateTime('now'));;
+        $now = (new DateTime('now'));
         $interval = abs($now->getTimestamp() - $lastActive->getTimestamp());
 
         return $interval;
