@@ -48,8 +48,8 @@ if (strlen($contentTitle) < 6) {
     exit("ERROR: {$contentTitle} is not a valid title.");
 }
 
-$baseDir = '/var/www/' . $contentType . 's/'; /* Docker dir */
-//$baseDir = '/Users/Peligro/My Drive/School/2024/Spring 2024/CS421 - Software Development Capstone/Assignments/Project/DevArcade/' . $contentType . 's/'; /* MacOS IDE dir */
+//$baseDir = '/var/www/' . $contentType . 's/'; /* Docker dir */
+$baseDir = '/Users/Peligro/My Drive/School/2024/Spring 2024/CS421 - Software Development Capstone/Assignments/Project/DevArcade/' . $contentType . 's/'; /* MacOS IDE dir */
 $fullPath = realpath($baseDir . DIRECTORY_SEPARATOR . $contentTitle);
 
 if ($fullPath && !str_starts_with($fullPath, realpath($baseDir))) {
