@@ -8,8 +8,8 @@ require_once '../includes/config.php';
 
 echo '<body>';
 
-$featuredGame = 'Game One';
-$featuredDevLog = 'Dev Log - Game One';
+$featuredGame = 'Game Three';
+$featuredDevLog = 'Dev Log - Game Three';
 $gameTile = new GameTile($featuredGame, $dbConn);
 $devLogTile = new DevLogTile($featuredDevLog, $dbConn);
 

@@ -14,6 +14,7 @@ body.style.cssText = `
     margin: 0px;
     margin-top: 10vh;
     font-weight: bold;
+    font-family: 'Arial';
     font-size: 64px;
     padding: 0px;
     text-align: center;

@@ -13,8 +13,9 @@ body.innerHTML = 'Game One';
 body.style.cssText = `
     width: 1400px;
     height: 800px;
+    font-family: 'Helvetica';
     margin: 0px;
-    margin-top: 10vh;
+    margin-top: 15vh;
     font-weight: bold;
     font-size: 64px;
     padding: 0px;
