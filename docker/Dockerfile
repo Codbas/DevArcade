@@ -2,7 +2,7 @@ FROM php:8.2-apache
 
 ENV TZ=America/Los_Angeles
 
-COPY ./mysql-config.cnf /etc/mysql/conf.d/config.cnf
+COPY mysql-config.cnf /etc/mysql/conf.d/config.cnf
 COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
 
 RUN a2enmod rewrite
@@ -17,9 +17,9 @@ RUN apt-get update && \
 
 RUN docker-php-ext-install zip pdo_mysql
 
-COPY ./install-composer.sh ./
+COPY install-composer.sh ./
 
-COPY ./php.ini /usr/local/etc/php/
+COPY php.ini /usr/local/etc/php/
 
 RUN apt-get purge -y g++ \
     && apt-get autoremove -y \

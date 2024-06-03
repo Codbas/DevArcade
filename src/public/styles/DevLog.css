@@ -1,0 +1,62 @@
+.devlog-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    max-width: 1400px;
+    overflow: auto;
+}
+
+.devlog-iframe {
+    border: none;
+    border-top: solid 2px #ccc;
+    margin: 10px;
+}
+
+.devlog-top-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.devlog-title {
+    font-size: 24px;
+    font-weight: bold;
+    align-self: flex-end;
+}
+.devlog-views {
+    align-self: flex-end;
+}
+.game-link-button {
+    border: solid 1px #888;
+    background: #eee;
+    border-radius: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-self: flex-end;
+    transition: 0.1s;
+}
+.game-link-button:hover {
+    border: solid 1px #666;
+    background: #ccc;
+    cursor: pointer;
+    transition: 0.1s;
+}
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.no-link {
+    color: #444;
+    cursor: default !important;
+    user-select: none !important;
+}
+.no-link:hover {
+    border: solid 1px #888;
+    background: #eee;
+}
