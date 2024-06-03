@@ -1,0 +1,121 @@
+.container {
+    text-align: center;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+}
+
+.delete-header, .upload-header {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.delete-header {
+    padding-top: 50px;
+    border-top: solid 1px #b2b2b2;
+}
+
+#uploadContentButton {
+    margin-top: 20px;
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content-type-container {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+}
+.game-selector, .devlog-selector {
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: 18px;
+    width: 80px;
+    height: 30px;
+    background: #fff;
+    border: none;
+}
+
+.game-selector:hover, .devlog-selector:hover {
+    background: #ddd;
+    transition: 0.1s;
+}
+
+.selected {
+    border-bottom: solid 2px #000 !important;
+}
+
+.upload-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    display: grid;
+}
+.title-container, .description-container {
+    margin-top: 20px;
+}
+#upload-title, #upload-description {
+    width: 250px;
+}
+
+#title-label, #description-label {
+    float: left;
+}
+
+#upload-title, #upload-description {
+    float: right;
+}
+
+.file-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 25px;
+    margin-top: 20px;
+}
+#fileInput {
+    display: block;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    width: 370px;
+    float: left;
+}
+#removeFile {
+    float: right;
+    width: 18px;
+}
+#removeFile:hover {
+    cursor: pointer;
+    filter: invert(8%) sepia(98%) saturate(4380%) hue-rotate(4deg) brightness(114%) contrast(119%);
+    transition: 0.1s;
+}
+#removeFile:active {
+    filter: invert(15%) sepia(73%) saturate(7323%) hue-rotate(4deg) brightness(96%) contrast(120%);
+}
+
+.delete-container {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#deleteSelect {
+    float: left;
+    width: 300px !important;
+}
+#deleteContentButton {
+    float: right;
+    width: 70px;
+}
+
+#delete-message, #upload-message {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 20px;
+}
