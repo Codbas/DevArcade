@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: app
     build:
       context: ./docker
     image: devarcade
@@ -8,6 +9,7 @@ services:
     volumes:
       - ./:/var/www
   db:
+    container_name: database
     image: mariadb:10.4.28
     ports:
       - "3306:3306"

@@ -1,6 +1,6 @@
 <?php
 //$host = 'localhost'; /* Use with PHPStorm environment */
-$host = 'devarcade-db-1'; /* Use with docker environment */
+$host = 'database'; /* Use with docker environment */
 $dbName = 'DevArcade';
 $user = 'root';
 $password = 'root';
