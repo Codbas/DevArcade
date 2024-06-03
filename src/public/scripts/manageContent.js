@@ -33,29 +33,29 @@ function upload(event) {
 
     let errorMsg = checkInput(titleText);
     if (errorMsg !== '') {
-        event.preventDefault();
         uploadMessage.innerText = errorMsg;
-        return;
+        event.preventDefault();
+        return false;
     }
 
     errorMsg = checkInput(descriptionText);
     if (errorMsg !== '') {
-        event.preventDefault();
         uploadMessage.innerText = errorMsg;
-        return;
+        event.preventDefault();
+        return false;
     }
 
     if (fileInput.value === '') {
-        event.preventDefault();
         uploadMessage.innerText = 'ERROR: No file selected';
-        return;
+        event.preventDefault();
+        return false;
     }
 
     errorMsg = getValidFileStatus();
     if (errorMsg !== '') {
-        event.preventDefault();
         uploadMessage.innerText = errorMsg;
-        return;
+        event.preventDefault();
+        return false;
     }
 
     uploadMessage.innerText = '';
@@ -70,19 +70,20 @@ function checkInput(element) {
             case 'game':
                 if (games.includes(element.value)) {
                     errorMsg = 'A game with this title already exists.';
+                    return errorMsg;
                 }
-                return errorMsg;
+                break;
             case 'devlog':
                 if (devlogs.includes('Dev Log - ' + element.value)) {
                     errorMsg = 'A dev log with this title already exists.';
+                    return errorMsg;
                 }
-                return errorMsg;
+                break;
         }
     }
 
     if (!validStringLength(element.value, element.minLength, element.maxLength)) {
-        errorMsg = 'ERROR: ' + element.name + ' must have between 6 and 40 characters';
-
+        errorMsg = `ERROR: ${element.name} must have between ${element.minLength} and ${element.maxLength} characters`;
         if (element.value === '') {
             return errorMsg;
         }
@@ -90,7 +91,7 @@ function checkInput(element) {
 
     if (!validString(element.value)) {
         if (errorMsg === '') {
-            errorMsg += 'ERROR: ' + element.name + ' can only contain ?!,.- symbols';
+            errorMsg += `ERROR: ${element.name} can only contain ?!,.- symbols`;
         }
         else {
             errorMsg += ' and can only contain the ?!,.- symbols'
@@ -110,8 +111,8 @@ function checkValidFile(event) {
         uploadMessage.textContent = errorMsg;
         removeFile();
         event.preventDefault();
+        return false;
     }
-
 }
 
 function getValidFileStatus() {
@@ -132,6 +133,7 @@ function showDeleteConfirm(e) {
 
     if (!confirm('Do you want to PERMANENTLY delete the ' + contentType + ' ' + content + '?')) {
         e.preventDefault();
+        return false;
     }
 }
 

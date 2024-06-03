@@ -30,6 +30,11 @@ RUN apt-get purge -y g++ \
 
 WORKDIR /var/www
 
-RUN chown -R www-data:www-data /var/www
+#RUN chown -R www-data:www-data /var/www
+
+RUN chown -R www-data:www-data /var/www && chmod -R 775 /var/www
+
+# Switch to www-data user
+USER www-data
 
 CMD ["apache2-foreground"]

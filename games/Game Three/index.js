@@ -12,8 +12,9 @@ body.style.overflow = 'hidden';
 body.innerHTML = 'Game Three';
 body.style.cssText = `
     margin: 0px;
-    margin-top: 10vh;
+    margin-top: 15vh;
     font-weight: bold;
+    font-family: 'Comic Sans MS';
     font-size: 64px;
     padding: 0px;
     text-align: center;
@@ -25,20 +26,20 @@ body.style.cssText = `
 
 const button = document.createElement('div');
 document.body.appendChild(button);
-let buttonWidth = 120;
-let buttonHeight = 60;
+let buttonWidth = 100;
+let buttonHeight = 50;
 
 button.innerHTML = "Click Me";
 button.style.cssText = `
     width: ${buttonWidth}px;
     height: ${buttonHeight}px;
-    background: #888888;
+    background: #8d0000;
     border: 2px solid #000000;
     color: #ffffff;
     font-family: 'Comic Sans MS';
     font-size: 16px;
     font-weight: normal;
-    border-radius: 6px;
+    border-radius: 5px;
     text-align: center;
     line-height: ${buttonHeight}px; 
     cursor: pointer;
@@ -49,10 +50,10 @@ button.style.cssText = `
 `;
 
 button.addEventListener('mouseover', function () {
-    button.style.background = '#555555';
+    button.style.background = '#8d0000';
 })
 button.addEventListener('mouseout', function () {
-    button.style.background = '#888888';
+    button.style.background = '#e70000';
 })
 
 let start = false;
@@ -72,12 +73,12 @@ let velocityX = 0, velocityY = 0;
 
 let drag = 0.015;
 let bounceFactor = 1.50;
-let mousePower = 0.005;
-let maxAcceleration = 3.0;
-let minAcceleration = -3.0;
-let maxVelocity = 7;
-let minVelocity = -7;
-let forceRadius = 750;
+let mousePower = 0.040;
+let maxAcceleration = 5.0;
+let minAcceleration = -5.0;
+let maxVelocity = 20;
+let minVelocity = -20;
+let forceRadius = 100;
 let maxForce = 75;
 let minForce = -75;
 
@@ -95,24 +96,40 @@ function updateButtonPosition() {
     velocityX *= (1 - drag);
     velocityY *= (1 - drag);
 
+    let bounce = false;
+
     posX += velocityX;
     if (posX < 0) {
         posX = 0;
         velocityX = -velocityX * bounceFactor;
+        bounce = true;
     }
     if (posX > (windowWidth - buttonWidth)) {
         posX = (windowWidth - buttonWidth)
         velocityX = -velocityX * bounceFactor;
+        bounce = true;
     }
 
     posY += velocityY;
     if (posY < 0) {
         posY = 0;
         velocityY = -velocityY * bounceFactor;
+        bounce = true;
     }
     if (posY > (windowHeight - buttonHeight)) {
         posY = (windowHeight - buttonHeight);
         velocityY = -velocityY * bounceFactor;
+        bounce = true;
+    }
+
+    if (bounce) {
+        button.style.background = '#d05f5f';
+        button.style.border = 'solid 2px red';
+        setTimeout(function(){
+            button.style.background = '#8d0000';
+            button.style.border = 'solid 2px black';
+        }, 50);
+        bounce = false;
     }
 
     button.style.top = posY + 'px';
@@ -182,7 +199,7 @@ const optionId = ['mousePower', 'drag', 'bounceFactor','forceRadius', 'maxAccele
     'maxVelocity', 'buttonWidth', 'buttonHeight']
 const optionStrings = ['Mouse Power', 'Drag', 'Wall Bounce', 'Force Radius', 'Max Acceleration',
     'Max Velocity', 'Button Width', 'Button Height', 'Reset To Defaults'];
-const optionRange = [[0.0, 0.03], [0.0, 1.0], [0.0, 5.0], [0.0, 2000.0], [0.0, 20.0], [0.0, 30.0], [10, 500], [10, 500]];
+const optionRange = [[0.0, 0.04], [0.0, 1.0], [0.0, 5.0], [10.0, 2000.0], [0.0, 25.0], [0.0, 35.0], [10, 500], [10, 500]];
 const optionDefault = [mousePower, drag, bounceFactor, forceRadius, maxAcceleration, maxVelocity, buttonWidth, buttonHeight];
 
 for (let i = 0; i < numOptions; i++) {
@@ -251,7 +268,7 @@ for (let i = 0; i < numOptions; i++) {
 }
 
 let resetDefaults = document.createElement('div');
-resetDefaults.innerHTML = "Reset To Defaults";;
+resetDefaults.innerHTML = "Reset To Defaults";
 resetDefaults.style.cursor = 'pointer';
 
 resetDefaults.addEventListener('click', function() {

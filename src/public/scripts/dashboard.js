@@ -32,12 +32,14 @@ document.body.appendChild(dashMenu);
 function showDashMenu(event) {
     event.stopPropagation();
     dashMenu.className = "visible";
+    return false;
 }
 
 function hideDashMenu(event) {
     dashMenu.classList.remove("visible");
     event.preventDefault();
     event.stopPropagation();
+    return false;
 }
 
 function isClickOutsideDashMenu(event) {
