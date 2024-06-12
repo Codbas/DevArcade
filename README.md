@@ -1,29 +1,29 @@
 # About DevArcade
 DevArcade is my Software Development Capstone Project for Columbia Basin College in Spring 2024.
-&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
 DevArcade is a PHP web application for sharing JavaScript/HTML/CSS games and dev logs. It is meant to show games made without 3rd party libraries and highlight the development and thought process involved in making the games.
-&nbsp;
+
 Because Games and Dev Logs are strictly JavaScript, HTML, and CSS, theymust follow a strict file structure. Games are stored on the web server under the /var/www/games directory and devlogs are located in /var/www/devlogs.
-&nbsp;
-&nbsp;
+
+
 ## Game Structure
 Games must contain index.html and image.jpg to be uplaoded to the server. image.jpg serves as the preview of the game. Games may also contain index.css annd index.js, but those are optional files. **No other files or foldersare allowed**.
-&nbsp;
-&nbsp;
+
+
 ## Dev Log Structure
 Dev Logs must contain index.html. They may also contain index.css, index.js and any number of jpg images. As with Games, no other files or folders are allowed.
-&nbsp;
-&nbsp;
+
+
 ## Uploading a new Game or Dev Log
 Compress the files in the root directory a .zip with any name. If the zip file contents are valid, they will be added to the server.
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
+
+
+
+
 # Running DevArcade Locally
 This project is built to run in a Docker container. It can run on a LAMP server, but additional configuration will be requred. If you already have Docker installed, skip to the [Building the Docker Container](##building-the-docker-container).
-&nbsp;
-&nbsp;
+
+
 ## Docker Installation
 1. Install Docker [here](https://docs.docker.com/desktop/install/windows-install/)
 2. Once docker is installed, make sure it is running.
