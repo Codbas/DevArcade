@@ -21,7 +21,7 @@ Compress the files in the root directory a .zip with any name. If the zip file c
 
 
 # Running DevArcade Locally
-This project is built to run in a Docker container. It can run on a LAMP server, but additional configuration will be requred. If you already have Docker installed, skip to the [Building the Docker Container](#Building the Docker Container).
+This project is built to run in a Docker container. It can run on a LAMP server, but additional configuration will be requred. If you already have Docker installed, skip to the [Building the Docker Container](##Building the Docker Container).
 
 
 ## Docker Installation
