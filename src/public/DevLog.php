@@ -11,6 +11,7 @@ else {
     $title = preg_replace('/[^a-zA-Z0-9 .,\-!?]/', '', $title);
 }
 require_once '../includes/config.php';
+require_once '../includes/siteHits.php';
 
 echo '<body>';
 
@@ -28,13 +29,17 @@ if ($devlogExists) {
     }
 }
 
-// TODO: increment dev log view count
 if (!$devlogExists) {
     exit('<p style="margin-top: 10%; font-size: 20px; text-align: center;">ERROR: ' . $title . ' does not exist</p>');
 }
 
+$ip = $_SERVER['REMOTE_ADDR'];
 $devlog = new DevLogLoader($title, $dbConn);
 
 echo $devlog->getHTMLString();
+
+if ($devlog->secondsSinceLastView($ip) > 60) {
+    $devlog->addView($ip);
+}
 
 include('../includes/footer.php');

@@ -63,7 +63,7 @@ function clickRedirect(event) {
 }
 
 function clickLogout() {
-    fetch('../includes/logoutUser.php', {
+    fetch('includes/logoutUser.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

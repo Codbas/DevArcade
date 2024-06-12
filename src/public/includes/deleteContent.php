@@ -15,7 +15,7 @@ $contentType = $_POST['contentType'];
 $sessionId = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['sessionId']);
 $username = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['username']);
 
-if (strlen($username) > 20 || strlen($sessionId) > 255 ) {
+if (strlen($username) > 20 || strlen($sessionId) > 255) {
     exit("ERROR 401: Unauthorized");
 }
 
@@ -23,7 +23,7 @@ if ($contentType !== 'game' && $contentType !== 'devlog') {
     exit("ERROR 401: Unauthorized");
 }
 
-include_once 'db.php';
+include_once '../../includes/db.php';
 
 $sql = 'select count(*)
         from Sessions
@@ -38,14 +38,14 @@ if ($stmt->rowCount() != 1) {
 }
 
 if (strlen($contentTitle) > 50) {
-    exit("ERROR: {$contentTitle} is not a valid title.");
+    exit("<strong>ERROR</strong>: $contentTitle is not a valid title");
 }
 
 $pattern = '/[^a-zA-Z0-9 .,\-!]/';
 $contentTitle = preg_replace($pattern, '', $_POST['deleteSelect']);
 
 if (strlen($contentTitle) < 6) {
-    exit("ERROR: {$contentTitle} is not a valid title.");
+    exit("<strong>ERROR</strong>: $contentTitle is not a valid title");
 }
 
 $baseDir = '/var/www/' . $contentType . 's/'; /* Docker dir */
@@ -53,21 +53,28 @@ $baseDir = '/var/www/' . $contentType . 's/'; /* Docker dir */
 $fullPath = realpath($baseDir . DIRECTORY_SEPARATOR . $contentTitle);
 
 if ($fullPath && !str_starts_with($fullPath, realpath($baseDir))) {
-    exit("ERROR: {$contentTitle} does not exist...");
+    exit("<strong>ERROR</strong>: $contentTitle does not exist...");
 }
 
 if (!is_dir($fullPath)) {
-    exit("ERROR: {$contentTitle} does not exist...");
+    exit("<strong>ERROR</strong>: $contentTitle does not exist...");
 }
 
 // Can finally delete those files...!
 
 
+if ($contentType == 'game') {
+    $contentTypeStr = 'Game';
+}
+else {
+    $contentTypeStr = 'Dev Log';
+}
+
 if (deleteDirectory($fullPath)) {
     echo "<script>document.getElementById('delete-message').dispatchEvent(new Event('content-deleted'));</script>";
-    echo "$contentType: $contentTitle deleted.";
+    echo "Deleted the $contentTypeStr <strong>$contentTitle</strong>";
 } else {
-    echo "ERROR: Failed to delete $contentType: $contentTitle.";;
+    echo "<strong>ERROR</strong>: Failed to delete the $contentTypeStr $contentTitle";
 }
 
 if ($contentType == 'game') {

@@ -11,8 +11,8 @@ if (!isset($_POST['username'], $_POST['password'])) {
     exit();
 }
 
-include('../includes/db.php');
-include('../includes/authUser.php');
+include('../../includes/db.php');
+include('../../includes/authUser.php');
 
 $username = $_POST['username'];
 $password = $_POST['password'];

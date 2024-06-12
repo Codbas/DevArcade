@@ -1,0 +1,20 @@
+#footer {
+    font-family: var(--footer-font);
+    font-size: var(--footer-font-size);
+    color: var(--footer-text-clr);
+    background: var(--footer-bg);
+    font-weight: 500;
+    line-height: 26px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    background: var(--footer-bg);
+    user-select: none;
+    -webkit-user-select: none;
+    cursor: default;
+}
+#footer-wrapper {
+    height: 30px;
+}

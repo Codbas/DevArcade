@@ -5,6 +5,8 @@
  */
 $title = 'Log In';
 require_once '../includes/config.php';
+require_once '../includes/siteHits.php';
+require_once '../includes/pageViews.php';
 
 echo '<body>';
 
@@ -14,23 +16,21 @@ if ($loggedIn) {
 }
 
 echo '
-    <form id="login-form" hx-post="../includes/loginUser.php" hx-target="#login-message" hx-swap="innerHTML">
-        <div class="username-container">
-            <label for="username" id="username-label">Username</label>
-            <input type="text" id="username" name="username" pattern="[A-Za-z0-9]{4,20}" minlength="4" maxlength="20" 
-            title="Username must be 4-20 characters long and can only contain letters and numbers." required>
+    <form id="login-form" hx-post="includes/loginUser.php" hx-target="#login-message" hx-swap="innerHTML">
+        <div id="input-container">
+            <div class="username-container">
+                <label for="username" id="username-label">Username</label>
+                <input class="textbox" type="text" id="username" name="username" 
+                title="Username must be 4-20 characters long and can only contain letters and numbers." required>
+            </div>
+            <div class="password-container">
+                <label for="password" id="password-label">Password</label>
+                <input class="textbox" type="password" id="password" name="password" title="Password length: 8-24, valid symbols: !@#$%^&*()?.-" required>
+            </div>
+            <input class="button" type="submit" id="submit-button" value="Log In">
         </div>
-        <div class="password-container">
-            <label for="password" id="password-label">Password</label>
-            <input type="password" id="password" name="password" minlength="8" 
-            maxlength="24" title="Password length: 8-24, valid symbols: !@#$%^&*()?.-" required>
-        </div>
-        <input type="submit" id="submit-button" value="Log In">
         <div id="login-message"></div>
     </form>
 ';
-
-
-// TODO: log page view information
 
 include('../includes/footer.php');

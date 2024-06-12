@@ -34,8 +34,13 @@ if (!$gameExists) {
     exit('<p style="margin-top: 10%; font-size: 20px; text-align: center;">ERROR: ' . $title . ' does not exist</p>');
 }
 
+$ip = $_SERVER['REMOTE_ADDR'];
 $game = new GameLoader($title, $dbConn);
 
 echo $game->getHTMLString();
+
+if ($game->secondsSinceLastPlay($ip) > 60) {
+    $game->addPlay($ip);
+}
 
 include('../includes/footer.php');

@@ -33,32 +33,32 @@ function upload(event) {
 
     let errorMsg = checkInput(titleText);
     if (errorMsg !== '') {
-        uploadMessage.innerText = errorMsg;
+        uploadMessage.innerHTML = errorMsg;
         event.preventDefault();
         return false;
     }
 
     errorMsg = checkInput(descriptionText);
     if (errorMsg !== '') {
-        uploadMessage.innerText = errorMsg;
+        uploadMessage.innerHTML = errorMsg;
         event.preventDefault();
         return false;
     }
 
     if (fileInput.value === '') {
-        uploadMessage.innerText = 'ERROR: No file selected';
+        uploadMessage.innerHTML = "<strong>ERROR</strong>: no file selected";
         event.preventDefault();
         return false;
     }
 
     errorMsg = getValidFileStatus();
     if (errorMsg !== '') {
-        uploadMessage.innerText = errorMsg;
+        uploadMessage.innerHTML = errorMsg;
         event.preventDefault();
         return false;
     }
 
-    uploadMessage.innerText = '';
+    uploadMessage.innerHTML = '';
 }
 
 function checkInput(element) {
@@ -83,7 +83,7 @@ function checkInput(element) {
     }
 
     if (!validStringLength(element.value, element.minLength, element.maxLength)) {
-        errorMsg = `ERROR: ${element.name} must have between ${element.minLength} and ${element.maxLength} characters`;
+        errorMsg = `<strong>ERROR</strong>: ${element.name} must have between ${element.minLength} and ${element.maxLength} characters`;
         if (element.value === '') {
             return errorMsg;
         }
@@ -91,7 +91,7 @@ function checkInput(element) {
 
     if (!validString(element.value)) {
         if (errorMsg === '') {
-            errorMsg += `ERROR: ${element.name} can only contain ?!,.- symbols`;
+            errorMsg += `<strong>ERROR</stong>: ${element.name} can only contain ?!,.- symbols`;
         }
         else {
             errorMsg += ' and can only contain the ?!,.- symbols'
@@ -141,7 +141,7 @@ function loadOptions(contentType) {
     removeAllChildNodes(deleteSelect);
     const contentArray = (contentType === 'games') ? games : devlogs;
 
-    if (contentArray.length < 1 || contentArray == undefined) {
+    if (contentArray.length < 1) {
         deleteButton.disabled = true;
         const noOptionText = 'No ' + contentType + ' found';
         const noOption = document.createElement('option');

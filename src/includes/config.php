@@ -19,7 +19,7 @@ require_once '../classes/GameTile.php';
 require_once '../classes/Page.php';
 require_once '../classes/Tile.php';
 
-include_once('../includes/db.php');
-include_once('../includes/session.php');
-include_once('../includes/header.php');
-include_once('../includes/navbar.php');
+include_once('db.php');
+include_once('session.php');
+include_once('header.php');
+include_once('navbar.php');

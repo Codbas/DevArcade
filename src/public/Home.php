@@ -1,7 +1,7 @@
 <?php session_start();
 // The Home page for the website
 /* @var PDO $dbConn
- *
+ * @var Page $page
  */
 $title = 'Home';
 require_once '../includes/config.php';
@@ -35,8 +35,12 @@ if ($devlogExists) {
     }
 }
 
-echo '<body>';
+require_once '../includes/siteHits.php';
+require_once '../includes/pageViews.php';
 
+echo '<body>
+        <div id="page-container">
+          <div id="content-wrap">';
 
 $gameTile = new GameTile($featuredGame, $dbConn);
 $devLogTile = new DevLogTile($featuredDevlog, $dbConn);
@@ -44,7 +48,8 @@ $devLogTile = new DevLogTile($featuredDevlog, $dbConn);
 echo '
 <div class="home-wrapper">
     <div class="welcome-text-wrapper">
-        <p class="welcome-text">Welcome to DevArcade!</p>
+        <h1 class="welcome-header">Welcome to DevArcade!</h1>
+        <p class="welcome-text">Play indie JavaScript games and learn how they were made!</p>
     </div>
     <div class="home-content"> 
         <p class="featured-text">Featured</p>
@@ -65,7 +70,5 @@ echo '
 
 echo $gameTile->getHTMLEventListener();
 echo $devLogTile->getHTMLEventListener();
-
-// TODO: Check to see if page should increment site hit and page view
 
 include('../includes/footer.php');

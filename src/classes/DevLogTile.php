@@ -3,17 +3,55 @@ include_once('Tile.php');
 // Get information for dev log tiles. Return HTML content for them
 class DevLogTile extends Tile {
     private int $views = 0;
+    private int $id;
 
     function __construct(string $title, $dbConn) {
         parent::__construct($title, $dbConn);
 
+        $this->setDevlogId();
         $this->setDescription();
-
-        // TODO: connect to database to get views for the dev log (views are stored individually, so the query needs to count them)
+        $this->setViews();
     }
 
-    public function getViews(): int {
-        return $this->views;
+    private function setDevlogId() : void {
+        $sql = 'select distinct id from DevLogs where title = :title';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam('title', $this->title);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 1) {
+            $this->id = -1;
+            error_log("ERROR: id could not be set on DevLog $this->title");
+            return;
+        }
+
+        $row = $stmt->fetch();
+        if (!$row) {
+            $this->id = -1;
+            return;
+        }
+
+        $this->id = $row['id'];
+    }
+
+    private function setViews() : void {
+        $sql = 'select count(*) as views from DevLogViews where devLogId = :id';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam('id', $this->id);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 1) {
+            error_log("ERROR too many rows from querying views for DevLog '$this->title'");
+            return;
+        }
+
+        $row = $stmt->fetch();
+        if (!$row) {
+            error_log("ERROR setting views for DevLog '$this->title'");
+            return;
+        }
+
+        $this->views = $row['views'];
     }
 
     public function getHTMLString(): string {
@@ -21,7 +59,7 @@ class DevLogTile extends Tile {
         <div class="log-tile-container" id="' . $this->title . '" data-url="DevLog.php?title=' . urlencode($this->title) . '">
             <div class="title-view-container">
                 <div class="log-title">' . $this->title . '</div>
-                <div class="view-counter">Views: ' . $this->views . '</div>
+                <div class="view-counter">Views: ' . number_format($this->views). '</div>
             </div>
             <div class="log-description"><p>' . $this->description . '</p></div>
         </div>
@@ -57,5 +95,3 @@ class DevLogTile extends Tile {
         }
     }
 }
-
-?>

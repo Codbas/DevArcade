@@ -4,29 +4,109 @@ class DevLogLoader {
     private int $views = 0;
     private string $description = 'Looks like no description exists...';
     private string $title;
-    private $dbConn;
+    private int $id;
+    private PDO $dbConn;
 
     function __construct(string $title, $dbConn) {
         $this->title = $title;
         $this->dbConn = $dbConn;
+        $this->setDevlogId();
+        $this->setViews();
     }
 
-    public function getViews(): int {
-        return $this->views;
+    private function setDevlogId() : void {
+        $sql = 'select distinct id from DevLogs where title = :title';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam('title', $this->title);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 1) {
+            $this->id = -1;
+            error_log("ERROR: id could not be set on DevLog $this->title");
+            return;
+        }
+
+        $row = $stmt->fetch();
+        if (!$row) {
+            $this->id = -1;
+            return;
+        }
+
+        $this->id = $row['id'];
     }
 
-    public function getTitle(): string {
-        return $this->title;
+    public function secondsSinceLastView($ip) : int {
+        if ($this->id == -1) {
+            error_log("ERROR in DevLogLoader.php: Invalid DevLog id (-1). Unable to check seconds since last devlog view.");
+            return 0;
+        }
+
+        $sql = 'select timestamp
+                from DevLogViews
+                where devLogId = :id and ip = :ip
+                order by timestamp desc
+                limit 1';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam('id', $this->id);
+        $stmt->bindParam('ip', $ip);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 1) {
+            return 999999999;
+        }
+
+        $row = $stmt->fetch();
+
+        if (!$row) {
+            return 999999999;
+        }
+
+        try {
+            $lastView = new DateTime($row['timestamp']);
+        } catch (Exception $e) {
+            error_log("$e: Error getting lastView timestamp in DevLogLoader.php");
+            return 999999999;
+        }
+
+        $now = (new DateTime('now'));
+        return abs($now->getTimestamp() - $lastView->getTimestamp());;
     }
 
-    public function addView(): bool {
-        // TODO: logic to ensure the view should be added to the database
+    private function setViews() : void {
+        $sql = 'select count(*) as views from DevLogViews where devLogId = :id';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam('id', $this->id);
+        $stmt->execute();
 
-        // TODO: check that dev log with an id exists, if not, create one
+        if ($stmt->rowCount() != 1) {
+            error_log("ERROR too many rows from querying views for DevLog '$this->title'");
+            return;
+        }
 
-        // TODO: get devlogid for this dev log
+        $row = $stmt->fetch();
+        if (!$row) {
+            error_log("ERROR setting views for DevLog '$this->title'");
+            return;
+        }
 
-        // TODO: connect to database and add view (devlogid, ip,timestamp)
+        $this->views = $row['views'];
+    }
+    public function addView($ip): bool {
+        if ($this->id == -1) {
+            error_log("ERROR in DevLogLoader.php: Invalid DevLog id (-1). Unable to increase devlog views.");
+            return false;
+        }
+        $sql = 'insert into DevLogViews (timestamp, ip, devLogId)
+                values(now(), :ip, :devLogId)';
+        $stmt = $this->dbConn->prepare($sql);
+        $stmt->bindParam('ip', $ip);
+        $stmt->bindParam('devLogId', $this->id);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 1) {
+            error_log("ERROR in DevLogLoader.php: error increasing DevLog view of DevLog id: $this->id");
+            return false;
+        }
 
         return true;
     }
@@ -40,7 +120,7 @@ class DevLogLoader {
         $redirectUrl = "Game.php?title=$gameTitle";
 
         if (file_exists("../../games/" . substr($this->title, 10))) {
-            $gameButtonHTML = '<a href="' . $redirectUrl . '"><div class="game-link-button" >Play The Game</div></a>';
+            $gameButtonHTML = '<a class="button-anchor" href="' . $redirectUrl . '"><div class="game-link-button button" >Play The Game</div></a>';
         }
         else {
             $gameButtonHTML = '<div class="game-link-button no-link" >No Game Exists</div>';
@@ -50,7 +130,7 @@ class DevLogLoader {
         <div class="devlog-container">
             <div class="devlog-top-bar">
                 <div class="devlog-title">' . $this->title . '</div>
-                <div class="devlog-views">Views: ' . $this->views . '</div>' .
+                <div class="devlog-views">Views: ' . number_format($this->views) . '</div>' .
                 $gameButtonHTML . '
             </div>
                 <iframe class="devlog-iframe" onload="this.height=(this.contentWindow.document.body.scrollHeight) + 100;" src="../../devlogs/' . $this->title . '/index.html"></iframe>

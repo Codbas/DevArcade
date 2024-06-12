@@ -24,7 +24,7 @@ if ($contentType !== 'game' && $contentType !== 'devlog') {
     exit("ERROR 401: Unauthorized");
 }
 
-include_once 'db.php';
+include_once '../../includes/db.php';
 
 $sql = 'select count(*)
         from Sessions
@@ -42,25 +42,25 @@ $title = trim($title);
 $description = trim($description);
 
 if (strlen($title) < 6 || strlen($title) > 50) {
-    exit("ERROR: Title must be between 6 and 50 characters long.");
+    exit("<strong>ERROR</strong>: Title must be between 6 and 50 characters long.");
 }
 if (strlen($description) < 10 || strlen($description) > 255) {
-    exit("ERROR: Description must be between 10 and 255 characters long.");
+    exit("<strong>ERROR</strong>: Description must be between 10 and 255 characters long.");
 }
 
 if ($_FILES['file']['size'] > 1_000_000 * 10) {
-    exit('ERROR: File must be under 10MB.  (' . number_format($_FILES['file']['size'] / 1_000_000, 1) . 'MB)');
+    exit('<strong>ERROR</strong>: File must be under 10MB.  (' . number_format($_FILES['file']['size'] / 1_000_000, 1) . 'MB)');
 }
 
 $fileExtension = strtolower(pathinfo($_FILES["file"]["name"], PATHINFO_EXTENSION));
 if ($fileExtension != 'zip') {
-    exit("ERROR: only zip files are allowed.");
+    exit("<strong>ERROR</strong>: only zip files are allowed.");
 }
 
 
 $zip = new ZipArchive;
 if ($zip->open($_FILES['file']['tmp_name']) !== true) {
-    exit("ERROR: the zip file could not be opened");
+    exit("<strong>ERROR</strong>: the zip file could not be opened");
 }
 
 $macosFiles = false;
@@ -75,14 +75,14 @@ for ($i = $zip->numFiles - 1; $i >= 0; $i--) {
 if ($macosFiles) {
     $zip->close();
     if ($zip->open($_FILES['file']['tmp_name']) !== true) {
-        exit("ERROR: the zip file could not be opened");
+        exit("<strong>ERROR</strong>: the zip file could not be opened");
     }
 }
 
 for ($i = $zip->numFiles - 1; $i >= 0; $i--) {
     $filename = $zip->getNameIndex($i);
     if (str_ends_with($filename, '/')) {
-        exit('ERROR: zip cannot contain folders. Folder found: "' . substr($filename,0, (strlen($filename) - 1)) . '"');
+        exit('<strong>ERROR</strong>: zip cannot contain folders. Folder found: "' . substr($filename,0, (strlen($filename) - 1)) . '"');
     }
 }
 
@@ -116,25 +116,25 @@ foreach ($zipFiles as $file) {
 
 if ($extraFiles) {
     if ($contentType == 'game') {
-        exit("ERROR: zip contains extra files. Only index.html, index.js, styles.css, and image.jpg allowed.");
+        exit("<strong>ERROR</strong>: zip contains extra files. Only index.html, index.js, styles.css, and image.jpg allowed");
     }
     else {
-        exit("ERROR: zip contains extra files. Only index.html, index.js, styles.css, and .jpg or .png images allowed.");
+        exit("<strong>ERROR</strong>: zip contains extra files. Only index.html, index.js, styles.css, and .jpg or .png images allowed");
     }
 }
 
 if (!empty($missingFiles)) {
-    exit('ERROR: required files are missing: ' . implode(', ', $missingFiles));
+    exit('<strong>ERROR</strong>: required files are missing: ' . implode(', ', $missingFiles));
 }
 
 if ($contentType == 'game') {
     $table = 'Games';
-    $extractDir = '../../games/' . $title . '/';
+    $extractDir = '../../../games/' . $title . '/';
 }
 else {
     $title = 'Dev Log - ' . $title;
     $table = 'DevLogs';
-    $extractDir = '../../devlogs/' . $title . '/';
+    $extractDir = '../../../devlogs/' . $title . '/';
 }
 
 $extraction_successful = true;
@@ -149,12 +149,18 @@ for ($i = 0; $i < $zip->numFiles; $i++) {
 $zip->close();
 
 if (!$extraction_successful) {
-    exit("ERROR: something went wrong during extraction.");
+    exit("<strong>ERROR</strong>: something went wrong during zip extraction");
 }
 
+if ($contentType == 'game') {
+    $contentTypeStr = 'Game';
+}
+else {
+    $contentTypeStr = 'Dev Log';
+}
 
 echo "<script>document.getElementById('upload-message').dispatchEvent(new Event('content-uploaded'));</script>";
-echo "$contentType: $title uploaded.";
+echo "Uploaded $contentTypeStr <strong>$title</strong>";
 
 
 $sql = "insert into $table (title, description) (

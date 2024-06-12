@@ -1,9 +1,13 @@
 #login-form {
-    padding: 30px;
-    margin-top: 50px;
-    max-width: 300px;
+    padding: var(--page-padding-top) 30px 30px;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+#input-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 300px;
     display: grid;
 }
 
@@ -22,16 +26,28 @@
 }
 
 #submit-button {
-    width: 60px;
+    font-family: var(--btn-font);
+    font-size: var(--btn-font-size);
+    height: calc(var(--btn-height) + 2px);
+    color: var(--btn-font-clr);
+    background: var(--btn-bg);
+    border-color: var(--btn-border-clr);
+    line-height: 0;
+    width: 72px;
+    padding: 0;
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
+}
+#submit-button:hover {
+    color: var(--btn-font-hover-clr);
+    background: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover-clr);
 }
 
 #login-message {
     text-align: center;
     color: red;
-    width: 300px;
     height: 30px;
     margin-top: 30px;
     margin-left: auto;

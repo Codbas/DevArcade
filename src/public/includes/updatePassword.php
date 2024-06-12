@@ -11,7 +11,7 @@ if (!isset($_POST['sessionId'], $_POST['username'], $_POST['currentPassword'], $
     exit();
 }
 
-include('../includes/db.php');
+include('../../includes/db.php');
 
 $sessionId = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['sessionId']);
 $username = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['username']);
@@ -108,15 +108,13 @@ $stmt->bindParam(':username', $username);
 $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
-    echo '<p style="color: green;">Password changed. You will be redirected in 3 seconds...</p>';
+    echo '<p style="color: green;">Password changed. You will be redirected in 2 seconds...</p>';
     echo '<script>
     setTimeout(function() {
-        window.location.href="../public/Home.php";
-    }, 3000);
+        window.location.href="Home.php";
+    }, 2000);
     </script>';
 }
 else {
     echo '<p style="color: red;">ERROR: Failed to change password.</p>';
 }
-
-?>

@@ -5,8 +5,13 @@
  */
 $title = 'Dev Logs';
 require_once '../includes/config.php';
+require_once '../includes/siteHits.php';
+require_once '../includes/pageViews.php';
 
-echo '<body>';
+echo '<body>
+        <div id="page-container">
+          <div id="content-wrap">';
+
 
 $dir = '../../devlogs';
 

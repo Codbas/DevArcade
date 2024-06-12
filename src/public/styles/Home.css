@@ -1,30 +1,39 @@
 .home-wrapper {
-    max-width: 1400px;
-    margin-top: 50px;
+    max-width: 1200px;
+    padding-top: 50px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .welcome-text-wrapper {
     width: 100%;
 }
-.welcome-text {
+.welcome-text, .welcome-header {
     text-align: center;
     height: 100px;
     margin-top: 0;
     margin-left: 10px;
     margin-right: 10px;
-    font-size: 20px;
+    font-size: 18px;
+}
+.welcome-header {
+    font-size: 28px;
+    height: 50px;
 }
 .home-content {
     margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .featured-text {
     margin-top: 0;
     margin-left: 10px;
     margin-right: 10px;
-    text-decoration: underline;
+    border-bottom: solid 2px #000;
+    width: 110px;
     font-size: 22px;
     font-weight: bold;
 }

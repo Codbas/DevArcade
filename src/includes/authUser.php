@@ -1,7 +1,5 @@
 <?php
 function authenticateUser($dbConn, $username, $password, $ip) : string {
-
-    // check ip address has not failed too many login attempts
     $sql = 'select count(*) as failed
             from FailedLogin
             where ip = :ip and timestamp >= now() - interval 10 minute';
@@ -14,7 +12,6 @@ function authenticateUser($dbConn, $username, $password, $ip) : string {
         return json_encode(['status' => 'failed', 'error' => "Too many failed login attempts"]);
     }
 
-    // find user and check that their password matches
     $sql = 'select password
             from Users
             where username = :username';

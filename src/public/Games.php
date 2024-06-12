@@ -5,8 +5,13 @@
  */
 $title = 'Games';
 require_once '../includes/config.php';
+require_once '../includes/siteHits.php';
+require_once '../includes/pageViews.php';
 
-echo '<body>';
+echo '<body>
+        <div id="page-container">
+          <div id="content-wrap">';
+
 
 $dir = '../../games';
 
@@ -33,6 +38,5 @@ if (is_dir($dir)) {
 else {
     echo '<p style="margin-top: 10%; font-size: 20px; text-align: center;">No games found!</p>';
 }
-
 
 include('../includes/footer.php');
