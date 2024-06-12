@@ -62,7 +62,7 @@ echo '<body>
                 </div>
                 <div class="file-container">
                   <input type="file" id="fileInput" name="file" accept=".zip">
-                  <img id="removeFile" alt="remove" src="../res/trash.svg">
+                  <img id="removeFile" alt="remove" src="res/trash.svg">
                 </div>
                 <input class="button" type="submit" id="uploadContentButton" value="Upload">
                 <div id="upload-message"></div>

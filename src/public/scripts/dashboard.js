@@ -52,10 +52,10 @@ function clickRedirect(event) {
     console.log(event.target.id);
     switch (event.target.id) {
         case 'dash-change-password':
-            window.location.href = "../public/ChangePassword.php";
+            window.location.href = "ChangePassword.php";
             break;
         case 'dash-manage-content':
-            window.location.href = "../public/ManageContent.php";
+            window.location.href = "ManageContent.php";
             break;
         default:
             // Do nothing
@@ -74,7 +74,7 @@ function clickLogout() {
         .then(data => {
             console.log('Success:', data);
             if (data.status === 'success') {
-                window.location.href = "../public/Home.php";
+                window.location.href = "Home.php";
             } else {
                 console.error('Logout failed');
             }

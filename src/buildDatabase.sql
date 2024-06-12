@@ -102,7 +102,7 @@ begin
 
     # Homepage views
     set i = 1;
-    while i <= 14922 do
+    while i <= 15000 do
         set i = i + 1;
         insert into PageViews(timestamp, ip, pageId)
             values((now() - interval 1 second), '123.255.0.0', 1);
@@ -110,7 +110,7 @@ begin
 
     # Games views
     set i = 1;
-    while i <= 1149 do
+    while i <= 1000 do
             set i = i + 1;
             insert into PageViews(timestamp, ip, pageId)
             values((now() - interval 1 second), '123.255.0.0', 2);
@@ -118,7 +118,7 @@ begin
 
     # DevLog views
     set i = 1;
-    while i <= 344 do
+    while i <= 500 do
             set i = i + 1;
             insert into PageViews(timestamp, ip, pageId)
             values((now() - interval 1 second), '123.255.0.0', 3);
@@ -126,7 +126,7 @@ begin
 
     # About views
     set i = 1;
-    while i <= 144 do
+    while i <= 100 do
             set i = i + 1;
             insert into PageViews(timestamp, ip, pageId)
             values((now() - interval 1 second), '123.255.0.0', 4);
@@ -134,7 +134,7 @@ begin
 
     # Login views
     set i = 1;
-    while i <= 132 do
+    while i <= 100 do
             set i = i + 1;
             insert into PageViews(timestamp, ip, pageId)
             values((now() - interval 1 second), '123.255.0.0', 5);
@@ -142,7 +142,7 @@ begin
 
     # Change Password views
     set i = 1;
-    while i <= 45 do
+    while i <= 100 do
             set i = i + 1;
             insert into PageViews(timestamp, ip, pageId)
             values((now() - interval 1 second), '123.255.0.0', 6);
@@ -150,7 +150,7 @@ begin
 
     # Manage Content views
     set i = 1;
-    while i <= 132 do
+    while i <= 100 do
             set i = i + 1;
             insert into PageViews(timestamp, ip, pageId)
             values((now() - interval 1 second), '123.255.0.0', 7);
@@ -158,7 +158,7 @@ begin
 
     # Site hits
     set i = 1;
-    while i <= 697 do
+    while i <= 1000 do
             set i = i + 1;
             insert into SiteHits(timestamp, ip)
             values((now() - interval 1 second), '123.255.0.0');
@@ -166,7 +166,7 @@ begin
 
     # Game 1 plays
     set i = 1;
-    while i <= 344 do
+    while i <= 500 do
             set i = i + 1;
             insert into GamePlays(timestamp, ip, gameId)
             values((now() - interval 1 second), '123.255.0.0', 1);
@@ -174,7 +174,7 @@ begin
 
     # Game 1 views
     set i = 1;
-    while i <= 27 do
+    while i <= 10 do
             set i = i + 1;
             insert into DevLogViews(timestamp, ip, devLogId)
             values((now() - interval 1 second), '123.255.0.0', 1);
@@ -182,7 +182,7 @@ begin
 
     # Game 2 plays
     set i = 1;
-    while i <= 62 do
+    while i <= 50 do
             set i = i + 1;
             insert into GamePlays(timestamp, ip, gameId)
             values((now() - interval 1 second), '123.255.0.0', 2);
@@ -190,7 +190,7 @@ begin
 
     # Game 2 views
     set i = 1;
-    while i <= 12 do
+    while i <= 10 do
             set i = i + 1;
             insert into DevLogViews(timestamp, ip, devLogId)
             values((now() - interval 1 second), '123.255.0.0', 2);
@@ -198,7 +198,7 @@ begin
 
     # Game 3 plays
     set i = 1;
-    while i <= 5663 do
+    while i <= 5000 do
             set i = i + 1;
             insert into GamePlays(timestamp, ip, gameId)
             values((now() - interval 1 second), '123.255.0.0', 3);
@@ -206,7 +206,7 @@ begin
 
     # Game 3 views
     set i = 1;
-    while i <= 533 do
+    while i <= 500 do
             set i = i + 1;
             insert into DevLogViews(timestamp, ip, devLogId)
             values((now() - interval 1 second), '123.255.0.0', 3);
