@@ -5,7 +5,7 @@ class GameTile extends Tile {
     private int $plays = 0;
     private int $id;
 
-    function __construct(string $title, $dbConn) {
+    function __construct(string $title, PDO $dbConn) {
         parent::__construct($title, $dbConn);
         $this->setGameId();
         $this->setDescription();
